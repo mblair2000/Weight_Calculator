@@ -5,9 +5,8 @@ package weights;
  * This is my first personal project ever. The idea came to me when working
  * out. So many people, myself included, will work out at home gyms where you
  * need specific plates to equal specific total weights on each side of a
- * barbell. At home gyms though, plates and certain weights may be limited.
- * This code will hopefully take in a weight as an argument and spit out every
- * combination/possibility of weights for each side of a barbell.
+ * barbell. This code will take in a weight as an argument and spit
+ * out the most logical plates to use for your given weight
  * 
  * @author Michael Blair
  * @version 5.18.2022
@@ -43,15 +42,50 @@ public class Weight_Possibilities {
 		
 		// make sure weight is possible with given plates
 		if ( (weight - 45) % 5 != 0) {
-			System.out.println( "the weight " + weight + "cannot be accomplished with your " +
+			System.out.println( "the weight " + weight + " cannot be accomplished with your " +
 					"plate sizes, so I rounded it down by " + (weight % 5) +
-					" to " + (weight - (weight % 5)) );
+					" to " + (weight - (weight % 5)) + "\n");
 			weight -= weight % 5;	// make sure the weight is possible
 		}
 		
 		
 		// get weight needed for each side
 		double eachSide = (weight - 45) / 2;
+		
+		// add counters to each weight
+		int count45 = 0;
+		int count25 = 0;
+		int count10 = 0;
+		int count5 = 0;
+		int count2_5 = 0;
+		
+		// loop through each weight while possible and count biggest plates first
+		while (eachSide / 45 >= 1) {
+			eachSide -= 45;
+			count45++;
+		}
+		while (eachSide / 25 >= 1) {
+			eachSide -= 25;
+			count25++;
+		}
+		while (eachSide / 10 >= 1) {
+			eachSide -= 10;
+			count10++;
+		}
+		while (eachSide / 5 >= 1) {
+			eachSide -= 5;
+			count5++;
+		}
+		while (eachSide / 2.5 >= 1) {
+			eachSide -= 2.5;
+			count2_5++;
+		}
+		
+		
+		// print out most logical weights to use
+		System.out.println("You should use " + count45 + " 45 plates, " + count25 +
+				" 25 plates, " + count10 + " 10 plates, " + count5 + " 5 lb plates, and " +
+				count2_5 + " 2.5 plates on each side of the barbell");
 		
 	} // end of main
 	
